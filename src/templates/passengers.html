@@ -1,0 +1,10 @@
+<div>
+    <label for="twidget-passengers-detail">Пассажиры/Класс</label>
+    <div class="twidget-passengers-detail"
+         ng-class="{'active':$ctrl.active}">
+        <div class="twidget-pas-no"><span id="twidget-pas">{{$ctrl.getSum()}}</span>
+            <span class="twidget-pas-caption">пассажир</span>
+        </div>
+        <div class="twidget-class">эконом {{$ctrl.tripClass}}</div>
+    </div>
+</div>

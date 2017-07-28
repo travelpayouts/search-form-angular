@@ -47,33 +47,22 @@
                             </div>
                         </li>
                         <li class="twidget-flight-dates input-daterange input-group clearfix">
-                            <div class="twidget-dep-date twidget-form-item">
-                                <div class="twidget-input-box" id="rangeStart">
-                                    <label for="twidget-origin">Туда</label>
-                                    <search-form-datepicker-input data-date="$ctrl.dates.rangeStart"
-                                                            data-show-popup="$ctrl.showPopupById('rangeStart')"></search-form-datepicker-input>
-                                </div>
-                            </div>
-                            <div class="twidget-return-date twidget-form-item">
-                                <div class="twidget-input-box" id="rangeEnd">
-                                    <label for="twidget-origin">Обратно</label>
-                                    <search-form-datepicker-input data-date="$ctrl.dates.rangeEnd"
-                                                            data-show-popup="$ctrl.showPopupById('rangeEnd')"></search-form-datepicker-input>
-                                </div>
-                            </div>
+                            <search-form-datepicker-input
+                                    class="twidget-dep-date twidget-form-item"
+                                    label="'Туда'"
+                                    dates="$ctrl.dates"
+                                    key="'rangeStart'"
+                            ></search-form-datepicker-input>
+                            <search-form-datepicker-input
+                                    class="twidget-return-date twidget-form-item"
+                                    label="'Обратно'"
+                                    dates="$ctrl.dates"
+                                    key="'rangeEnd'"
+                            ></search-form-datepicker-input>
                         </li>
-                        <li class="twidget-passengers" data-template-url="search-form-passengers-select.html"
-                            data-animation="am-flip-x" data-auto-close="1" data-container="body"
-                            data-placement="bottom-left" bs-on-show="$ctrl.passengersToggle"
-                            bs-on-hide="$ctrl.passengersToggle" bs-popover><label
-                                for="twidget-passengers-detail">Пассажиры/Класс</label>
-                            <div class="twidget-passengers-detail"
-                                 ng-class="{'active':$ctrl.passengersActive}">
-                                <div class="twidget-pas-no"><span id="twidget-pas">{{$ctrl.getPassengersSum()}}</span> <span
-                                        class="twidget-pas-caption">пассажир</span>
-                                </div>
-                                <div class="twidget-class">эконом {{$ctrl.formData.trip_class}}</div>
-                            </div>
+                        <li class="twidget-passengers">
+                            <passengers passengers="$ctrl.formData.passengers"
+                                        trip-class="$ctrl.formData.trip_class"></passengers>
                         </li>
                         <li class="twidget-submit-button">
                             <button type="submit">Найти билеты</button>
@@ -86,15 +75,4 @@
             </div>
         </div>
     </div>
-
 </div>
-
-
-<script type="text/ng-template" id="search-form-passengers-select.html">
-
-</script>
-
-
-
-
-<script type="text/ng-template" id="date-to-template.html"></script>

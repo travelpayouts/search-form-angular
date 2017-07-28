@@ -4,26 +4,26 @@
             <ul class="twidget-age-group">
                 <li>
                     <div class="twidget-cell twidget-age-name">Взрослые</div>
-                    <passengers-value field="adults" passengers="self.formData.passengers"
-                                      value="self.formData.passengers.adults"></passengers-value>
+                    <passengers-value field="adults" passengers="$ctrl.passengers"
+                                      value="$ctrl.passengers.adults"></passengers-value>
                 </li>
                 <li>
                     <div class="twidget-cell twidget-age-name">Дети до 12 лет</div>
-                    <passengers-value field="children" passengers="self.formData.passengers"
-                                      value="self.formData.passengers.children"></passengers-value>
+                    <passengers-value field="children" passengers="$ctrl.passengers"
+                                      value="$ctrl.passengers.children"></passengers-value>
                 </li>
                 <li>
                     <div class="twidget-cell twidget-age-name">Дети до 2 лет</div>
-                    <passengers-value field="infants" passengers="self.formData.passengers"
-                                      value="self.formData.passengers.infants"></passengers-value>
+                    <passengers-value field="infants" passengers="$ctrl.passengers"
+                                      value="$ctrl.passengers.infants"></passengers-value>
                 </li>
             </ul>
             <div class="twidget-pas-class">
                 <div class="twidget-pass-check"
-                     ng-class="{'twidget-pass-check-checked':self.formData.trip_class == 1}">
+                     ng-class="{'twidget-pass-check-checked':$ctrl.tripClass == 1}">
                     <label>
-                        <input type="checkbox" ng-model="self.formData.trip_class" ng-true-value="'1'"
-                               ng-false-value="'0'">
+                        <input type="checkbox" ng-model="$ctrl.tripClass" ng-true-value="1"
+                               ng-false-value="0">
                         Перелет
                         бизнес-классом</label>
                 </div>

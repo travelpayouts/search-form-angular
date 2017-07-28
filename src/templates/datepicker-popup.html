@@ -1,16 +1,12 @@
 <div class="datepicker ng-popover dropdown-menu ng-popover-orient-left ng-popover-orient-bottom ">
-    <datetimepicker ng-if="currDate == 'rangeStart'"
-                    data-ng-model="dates[currDate]"
-                    data-datetimepicker-config="{startView:'day', minView:'day'}"
-                    data-on-set-time="startDateOnSetTime()"
-                    data-before-render="startDateBeforeRender($dates)"></datetimepicker>
-    <datetimepicker ng-if="currDate == 'rangeEnd'"
-                    data-ng-model="dates[currDate]"
-                    data-datetimepicker-config="{startView:'day', minView:'day'}"
-                    data-on-set-time="endDateOnSetTime()"
-                    data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+    <datetimepicker
+            data-ng-model="$ctrl.pickerParams.model"
+            data-datetimepicker-config="$ctrl.pickerParams.options"
+            data-on-set-time="$ctrl.pickerParams.onSet"
+            data-before-render="$ctrl.pickerParams.beforeRender($view, $dates, $leftDate, $upDate, $rightDate)"
+    ></datetimepicker>
     <div class="datepicker-cancel">
-            <span class="datepicker-cancel-return-date" ng-if="currDate == 'rangeEnd'"
-                  ng-click="dates[currDate] =null;$hide();">Обратный билет не нужен</span>
+            <span class="datepicker-cancel-return-date" ng-if="$ctrl.pickerParams.showCancel"
+                  ng-click="$ctrl.date = null; $hide();">Обратный билет не нужен</span>
     </div>
 </div>

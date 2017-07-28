@@ -1,4 +1,5 @@
 var moment = require('moment');
+var angular = require('angular');
 // Using filter polyfill
 var filter = require('array-filter');
 require('moment/locale/ru');
@@ -77,26 +78,10 @@ angular.module('glook.travelPayoutsSearchComponent', [
         });
 
 
-        /**
-         * Get summ of all passengers
-         * @returns {*}
-         */
-        self.getPassengersSum = function () {
-            var sum = Object.values(self.formData.passengers).reduce(function (pv, cv) {
-                return parseInt(pv) + parseInt(cv);
-            }, 0);
-            if (isNaN(sum)) {
-                sum = 0;
-            }
-            return sum;
-        };
-
-
         this.$onInit = function () {
             if (self.params.lang !== undefined) {
                 self.lang = self.params.lang;
             }
-            console.log(self.formData);
             self.formData.originData = 'ROV';
             self.formData.destinationData = 'MOW';
 
@@ -108,114 +93,6 @@ angular.module('glook.travelPayoutsSearchComponent', [
 
         };
 
-
-        self.passengersActive = false;
-        self.passengersToggle = function () {
-            self.passengersActive = !self.passengersActive;
-        };
-
-
-        self.popups = {
-            rangeStart: createDatepickerPopup('rangeStart'),
-            rangeEnd: createDatepickerPopup('rangeEnd')
-        };
-
-        /**
-         * Create datepicker popup
-         * @param id
-         * @returns {*}
-         */
-        function createDatepickerPopup(id) {
-            if (document.querySelector('#' + id) !== undefined) {
-                var elem = angular.element(document.querySelector('#' + id));
-
-
-
-                return $popover($(elem).parent(), {
-                    template: require('./templates/datepicker-popup.html'),
-                    trigger: 'manual',
-                    autoClose: true,
-                    placement: 'bottom-left',
-                    container: 'body',
-                    scope: $scope
-                });
-            }
-            return null;
-        }
-
-        self.showPopupById = function (id) {
-            self.popups[id].show();
-        };
-
-
-        self.startDateOnSetTime = function () {
-            if (self.dates.rangeEnd === null) {
-                self.showPopupById('rangeEnd');
-            }
-            self.popups.rangeStart.hide();
-        };
-
-        self.endDateOnSetTime = function () {
-            self.popups.rangeEnd.hide();
-        };
-
-        self.startDateBeforeRender = function ($dates) {
-            setRange($dates);
-            // Set min date
-            $dates.filter(function (date) {
-                return date.localDateValue() < moment().subtract(1, 'day').valueOf();
-            }).forEach(function (date) {
-                date.selectable = false;
-            });
-
-            if (self.dates.rangeEnd && self.dates.rangeStart) {
-                var activeDate = moment(self.dates.rangeEnd);
-
-                $dates.filter(function (date) {
-                    return date.localDateValue() >= activeDate.valueOf()
-                }).forEach(function (date) {
-                    date.selectable = false;
-                })
-            }
-        };
-
-        function setRange(dates) {
-            if (self.dates.rangeStart && self.dates.rangeEnd) {
-                var rangeStart = moment(self.dates.rangeStart);
-                var rangeEnd = moment(self.dates.rangeEnd);
-                var rangeDates = dates.filter(function (date) {
-                    return date.localDateValue() >= rangeStart.valueOf() && date.localDateValue() <= rangeEnd.valueOf();
-                });
-                rangeDates.forEach(function (date, key) {
-                    if (key === 0) {
-                        date.rangeStart = true;
-                    } else if (key === rangeDates.length - 1) {
-                        date.rangeEnd = true;
-                    }
-                    date.range = true;
-                })
-            }
-        }
-
-        self.endDateBeforeRender = function ($view, $dates) {
-            setRange($dates);
-            // Set min date
-            $dates.filter(function (date) {
-                return date.localDateValue() < moment().valueOf();
-            }).forEach(function (date) {
-                date.selectable = false;
-            });
-
-            if (self.dates.rangeStart) {
-                var activeDate = moment(self.dates.rangeStart).subtract(1, $view).add(1, 'minute');
-
-                $dates.filter(function (date) {
-                    return date.localDateValue() <= activeDate.valueOf()
-                }).forEach(function (date) {
-                    date.selectable = false;
-                })
-            }
-        };
 
         /**
          * Get city info by user location
@@ -259,8 +136,49 @@ angular.module('glook.travelPayoutsSearchComponent', [
         }
 
     }
+}).component('passengers', {
+    template: require('./templates/passengers.html'),
+    bindings: {
+        passengers: '=',
+        tripClass: '='
+    },
+    controller: function ($element, $popover, $scope) {
+        var el = $element;
+        var self = this;
+        self.active = false;
+        self.toggle = function () {
+            self.active = !self.active;
+        };
+        $popover(el, {
+            template: require('./templates/passengers-dropdown.html'),
+            autoClose: 1,
+            onShow: self.toggle,
+            onHide: self.toggle,
+            placement: 'bottom-left',
+            container: 'body',
+            trigger: 'click',
+            scope: $scope
+        });
+
+        /**
+         * Get sum of all passengers
+         * @returns {*}
+         */
+        self.getSum = function () {
+            var sum = Object.values(self.passengers).reduce(function (pv, cv) {
+                return parseInt(pv) + parseInt(cv);
+            }, 0);
+            if (isNaN(sum)) {
+                sum = 0;
+            }
+            return sum;
+        };
+
+
+    }
 }).component('passengersValue', {
     template: require('./templates/passengers-age-select.html'),
+    require: '^passengers',
     bindings: {
         field: '@',
         passengers: '=',
@@ -319,8 +237,124 @@ angular.module('glook.travelPayoutsSearchComponent', [
 }).component('searchFormDatepickerInput', {
     template: require('./templates/datepicker-input.html'),
     bindings: {
-        date: '=',
+        dates: '=',
         showPopup: '&',
+        label: '<',
+        key: '<'
+
+    },
+    controller: function ($scope, $element, $popover) {
+        var el = $element;
+        var self = this;
+        
+        
+        self.pickerParams = {
+            options: {startView: 'day', minView: 'day'}
+        };
+        self.$onInit = function () {
+            self.date = self.dates[self.key];
+            self.pickerParams.model = self.dates[self.key];
+            var dateParams;
+            if (self.key === 'rangeStart') {
+                dateParams = {
+                    onSet: startRangeSetTime,
+                    beforeRender: startRangeRender,
+                    showCancel: false
+                };
+            } else {
+                dateParams = {
+                    onSet: endRangeSetTime,
+                    beforeRender: endRangeRender,
+                    showCancel: true
+                };
+            }
+            angular.extend(self.pickerParams, dateParams)
+        };
+
+        self.popover = {
+            show: false,
+            el: $popover(el, {
+                template: require('./templates/datepicker-popup.html'),
+                autoClose: true,
+                placement: 'bottom-left',
+                container: 'body',
+                trigger: 'manual',
+                scope: $scope,
+            }),
+            toggle: function () {
+                this.show = !this.show;
+                return this.el.toggle();
+            }
+        };
+
+        function startRangeSetTime() {
+            if (self.dates.rangeEnd === null) {
+                // self.showPopupById('rangeEnd');
+            }
+            self.popover.el.hide();
+        }
+
+        function endRangeSetTime() {
+            self.popover.el.hide();
+        }
+
+        function startRangeRender($view, $dates) {
+            setRange($dates);
+            // Set min date
+            $dates.filter(function (date) {
+                return date.localDateValue() < moment().subtract(1, 'day').valueOf();
+            }).forEach(function (date) {
+                date.selectable = false;
+            });
+
+            if (self.dates.rangeEnd && self.dates.rangeStart) {
+                var activeDate = moment(self.dates.rangeEnd);
+
+                $dates.filter(function (date) {
+                    return date.localDateValue() >= activeDate.valueOf()
+                }).forEach(function (date) {
+                    date.selectable = false;
+                })
+            }
+        }
+
+        function setRange(dates) {
+            if (self.dates.rangeStart && self.dates.rangeEnd) {
+                var rangeStart = moment(self.dates.rangeStart);
+                var rangeEnd = moment(self.dates.rangeEnd);
+                var rangeDates = dates.filter(function (date) {
+                    return date.localDateValue() >= rangeStart.valueOf() && date.localDateValue() <= rangeEnd.valueOf();
+                });
+                rangeDates.forEach(function (date, key) {
+                    if (key === 0) {
+                        date.rangeStart = true;
+                    } else if (key === rangeDates.length - 1) {
+                        date.rangeEnd = true;
+                    }
+                    date.range = true;
+                })
+            }
+        }
+
+        function endRangeRender($view, $dates) {
+            setRange($dates);
+            // Set min date
+            $dates.filter(function (date) {
+                return date.localDateValue() < moment().valueOf();
+            }).forEach(function (date) {
+                date.selectable = false;
+            });
+
+            if (self.dates.rangeStart) {
+                var activeDate = moment(self.dates.rangeStart).subtract(1, $view).add(1, 'minute');
+
+                $dates.filter(function (date) {
+                    return date.localDateValue() <= activeDate.valueOf()
+                }).forEach(function (date) {
+                    date.selectable = false;
+                })
+            }
+        }
     }
 }).directive('searchFormSelectInput', ['$window', function ($window) {
     return {
