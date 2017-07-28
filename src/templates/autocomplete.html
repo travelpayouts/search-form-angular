@@ -1,0 +1,27 @@
+<div class="autocomplete {{ attrs.class }}" id="{{ attrs.id }}">
+    <input
+            type="text"
+            ng-model="searchParam"
+            placeholder="{{ attrs.placeholder }}"
+            class="{{ attrs.inputclass }}"
+            tabindex="{{ attrs.tabindex }}"
+            id="{{ attrs.inputid }}"
+            name="{{ attrs.name }}"
+            ng-required="{{ autocompleteRequired }}"/>
+    <ul ng-show="completing && (suggestions | filter:searchFilter).length > 0">
+        <li
+                suggestion
+                ng-repeat="suggestion in suggestions | filter:searchFilter track by $index"
+                index="{{ $index }}"
+                val="{{ suggestion }}"
+                ng-class="{ active: ($index === selectedIndex) }"
+                ng-click="select(suggestion)">
+
+
+            {{suggestion}}
+        </li>
+    </ul>
+</div>
+
+<!--<li class="clearfix"><span class="twidget-city-name" data-name="Миртл-Бич, SC" data-country="США">Миртл-Бич, SC, <span>США</span></span><span-->
+<!--class="twidget-num-hotel">MYR</span><br><span class="twidget-city-airport-name">Миртл-Бич</span></li>-->

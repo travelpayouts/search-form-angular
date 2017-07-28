@@ -1,12 +1,12 @@
 <div class="datepicker ng-popover dropdown-menu ng-popover-orient-left ng-popover-orient-bottom ">
     <datetimepicker
-            data-ng-model="$ctrl.pickerParams.model"
+            data-ng-model="$ctrl.dates[$ctrl.key]"
             data-datetimepicker-config="$ctrl.pickerParams.options"
-            data-on-set-time="$ctrl.pickerParams.onSet"
+            data-on-set-time="$ctrl.pickerParams.onSet()"
             data-before-render="$ctrl.pickerParams.beforeRender($view, $dates, $leftDate, $upDate, $rightDate)"
     ></datetimepicker>
     <div class="datepicker-cancel">
             <span class="datepicker-cancel-return-date" ng-if="$ctrl.pickerParams.showCancel"
-                  ng-click="$ctrl.date = null; $hide();">Обратный билет не нужен</span>
+                  ng-click="$ctrl.dates[$ctrl.key] = null; $hide();">Обратный билет не нужен</span>
     </div>
 </div>

@@ -2,16 +2,16 @@
     <label>{{$ctrl.label}}</label>
     <div class="twidget-input-box-show-popup" ng-click="$ctrl.popover.toggle()">
         <input type="text">
-        <div class="twidget-icon-cal" ng-hide="$ctrl.date"></div>
+        <div class="twidget-icon-cal" ng-hide="$ctrl.dates[$ctrl.key]"></div>
         <span class="twidget-date-text twidget-date-depart"
-              ng-hide="$ctrl.date"
+              ng-hide="$ctrl.dates[$ctrl.key]"
         >{{$ctrl.label}}</span>
-        <span ng-show="$ctrl.date"
+        <span ng-show="$ctrl.dates[$ctrl.key]"
               class="twidget-date-text twidget-date-depart"
-        >{{$ctrl.date  | date:"d MMMM, EEE"}}</span>
+        >{{$ctrl.dates[$ctrl.key]  | date:"d MMMM, EEE"}}</span>
     </div>
-    <div class="twidget-icon-delete" ng-show="$ctrl.date"
-         ng-click="$ctrl.date=null;"></div>
+    <div class="twidget-icon-delete" ng-show="$ctrl.dates[$ctrl.key]"
+         ng-click="$ctrl.dates[$ctrl.key]=null;"></div>
 </div>
 
 
