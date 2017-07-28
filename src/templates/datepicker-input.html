@@ -1,0 +1,12 @@
+<input type="text" value="" ng-click="$ctrl.showPopup()">
+
+<div ng-click="$ctrl.showPopup()">
+    <div class="twidget-icon-cal" ng-hide="$ctrl.date"></div>
+    <span class="twidget-date-text twidget-date-depart"
+          ng-hide="$ctrl.date"
+    >Обратно</span>
+    <span ng-show="$ctrl.date"
+          class="twidget-date-text twidget-date-depart"
+    >{{$ctrl.date  | date:"d MMMM, EEE"}}</span></div>
+<div class="twidget-icon-delete" ng-show="$ctrl.date"
+     ng-click="$ctrl.date=null;"></div>

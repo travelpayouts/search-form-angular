@@ -1,0 +1,38 @@
+<div class="ng-popover dropdown-menu ng-popover-orient-left ng-popover-orient-bottom twidget-popup twidget-disable-select">
+    <div id="twidget-passenger-form">
+        <div class="twidget-passenger-form-wrapper">
+            <ul class="twidget-age-group">
+                <li>
+                    <div class="twidget-cell twidget-age-name">Взрослые</div>
+                    <passengers-value field="adults" passengers="self.formData.passengers"
+                                      value="self.formData.passengers.adults"></passengers-value>
+                </li>
+                <li>
+                    <div class="twidget-cell twidget-age-name">Дети до 12 лет</div>
+                    <passengers-value field="children" passengers="self.formData.passengers"
+                                      value="self.formData.passengers.children"></passengers-value>
+                </li>
+                <li>
+                    <div class="twidget-cell twidget-age-name">Дети до 2 лет</div>
+                    <passengers-value field="infants" passengers="self.formData.passengers"
+                                      value="self.formData.passengers.infants"></passengers-value>
+                </li>
+            </ul>
+            <div class="twidget-pas-class">
+                <div class="twidget-pass-check"
+                     ng-class="{'twidget-pass-check-checked':self.formData.trip_class == 1}">
+                    <label>
+                        <input type="checkbox" ng-model="self.formData.trip_class" ng-true-value="'1'"
+                               ng-false-value="'0'">
+                        Перелет
+                        бизнес-классом</label>
+                </div>
+            </div>
+            <ul class="twidget-age-group">
+                <li class="twidget-passengers-ready-button-wrapper">
+                    <div ng-click="$hide();" class="twidget-passengers-ready-button">Готово</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

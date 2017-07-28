@@ -1,0 +1,100 @@
+<div class="twidget-container" id="twidget" style="position: relative;">
+    <div class="twidget-tabs">
+        <div class="twidget-tab-content">
+            <div id="twidget-tab1" class="twidget-tab active">
+                <div class="twidget-header" target="_blank"><a
+                        href="https://www.aviasales.ru/?marker=78606"
+                        class="twidget-logo">
+                    <div class="twidget-logo-image twidget-aviasales-logo-img" width="30"
+                         height="30"></div>
+                    aviasales</a> <a href="https://www.aviasales.ru/?marker=78606"
+                                     class="twidget-title">Поиск
+                    дешёвых авиабилетов</a></div>
+                <div class="clearfix"></div>
+                <form action="https://hydra.aviasales.ru/searches/new" method="get" autocomplete="off"
+                      target="_blank">
+                    <ul class="twidget-form-list clearfix">
+                        <li class="twidget-origin">
+                            <div class="twidget-input-box" search-form-select-input=""><label for="twidget-origin">Город
+                                вылета</label>
+                                <input
+                                        type="text" id="twidget-origin" placeholder="Город вылета"
+                                        required="" ng-model="formData.origin.city_name">
+                                <div class="twidget-pseudo-input"><span
+                                        class="twidget-pseudo-name"> {{$ctrl.formData.origin.city_name}}</span><span
+                                        class="twidget-pseudo-country-name">,  {{$ctrl.formData.origin.country_name}}</span>
+                                </div>
+                            </div>
+                            <div class="twidget-origin-iata"> {{$ctrl.formData.origin.code}}</div>
+                            <div class="twidget-auto-fill-wrapper" data-type="avia">
+                                <ul></ul>
+                            </div>
+                        </li>
+                        <li class="twidget-destination ">
+                            <div class="twidget-input-box" search-form-select-input><label for="twidget-origin">Город
+                                прибытия</label>
+                                <input
+                                        type="text" id="twidget-destination" placeholder="Город вылета"
+                                        required="" ng-model="formData.destination.city_name">
+                                <div class="twidget-pseudo-input"><span
+                                        class="twidget-pseudo-name"> {{$ctrl.formData.destination.city_name}}</span><span
+                                        class="twidget-pseudo-country-name">,  {{$ctrl.formData.destination.country_name}}</span>
+                                </div>
+                            </div>
+                            <div class="twidget-origin-iata"> {{$ctrl.formData.destination.code}}</div>
+                            <div class="twidget-auto-fill-wrapper" data-type="avia">
+                                <ul></ul>
+                            </div>
+                        </li>
+                        <li class="twidget-flight-dates input-daterange input-group clearfix">
+                            <div class="twidget-dep-date twidget-form-item">
+                                <div class="twidget-input-box" id="rangeStart">
+                                    <label for="twidget-origin">Туда</label>
+                                    <search-form-datepicker-input data-date="$ctrl.dates.rangeStart"
+                                                            data-show-popup="$ctrl.showPopupById('rangeStart')"></search-form-datepicker-input>
+                                </div>
+                            </div>
+                            <div class="twidget-return-date twidget-form-item">
+                                <div class="twidget-input-box" id="rangeEnd">
+                                    <label for="twidget-origin">Обратно</label>
+                                    <search-form-datepicker-input data-date="$ctrl.dates.rangeEnd"
+                                                            data-show-popup="$ctrl.showPopupById('rangeEnd')"></search-form-datepicker-input>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="twidget-passengers" data-template-url="search-form-passengers-select.html"
+                            data-animation="am-flip-x" data-auto-close="1" data-container="body"
+                            data-placement="bottom-left" bs-on-show="$ctrl.passengersToggle"
+                            bs-on-hide="$ctrl.passengersToggle" bs-popover><label
+                                for="twidget-passengers-detail">Пассажиры/Класс</label>
+                            <div class="twidget-passengers-detail"
+                                 ng-class="{'active':$ctrl.passengersActive}">
+                                <div class="twidget-pas-no"><span id="twidget-pas">{{$ctrl.getPassengersSum()}}</span> <span
+                                        class="twidget-pas-caption">пассажир</span>
+                                </div>
+                                <div class="twidget-class">эконом {{$ctrl.formData.trip_class}}</div>
+                            </div>
+                        </li>
+                        <li class="twidget-submit-button">
+                            <button type="submit">Найти билеты</button>
+                        </li>
+                        {{$ctrl.formData.origin}}
+                        {{$ctrl.formData.destination}}
+                    </ul>
+                </form>
+                <div class="twidget-tab-bottom"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/ng-template" id="search-form-passengers-select.html">
+
+</script>
+
+
+
+
+<script type="text/ng-template" id="date-to-template.html"></script>
