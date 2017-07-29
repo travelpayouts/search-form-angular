@@ -9,25 +9,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
 
         //default language
         self.lang = 'en';
-        self.autocompleteResults = [
-            "Lord of the Rings",
-            "Drive",
-            "Science of Sleep",
-            "Back to the Future",
-            "Oldboy"
-        ];
 
-
-
-        // gives another movie array on change
-        $scope.updateAutocompleteResults = function(query){
-            console.log(query);
-            // // MovieRetriever could be some service returning a promise
-            // $scope.newmovies = MovieRetriever.getmovies(typed);
-            // $scope.newmovies.then(function(data){
-            //     $scope.movies = data;
-            // });
-        };
 
         self.dates = {
             rangeStart: "2017-07-29T21:00:00.000Z",
@@ -72,7 +54,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 })
             }
         });
-
 
 
         this.$onInit = function () {

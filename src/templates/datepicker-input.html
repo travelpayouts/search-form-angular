@@ -1,5 +1,5 @@
 <div class="twidget-input-box">
-    <label>{{$ctrl.label}}</label>
+    <label ng-click="$ctrl.popover.toggle()">{{$ctrl.label}}</label>
     <div class="twidget-input-box-show-popup" ng-click="$ctrl.popover.toggle()">
         <input type="text">
         <div class="twidget-icon-cal" ng-hide="$ctrl.dates[$ctrl.key]"></div>

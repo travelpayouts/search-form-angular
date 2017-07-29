@@ -11,68 +11,37 @@
                                      class="twidget-title">Поиск
                     дешёвых авиабилетов</a></div>
                 <div class="clearfix"></div>
-                <form action="https://hydra.aviasales.ru/searches/new" method="get" autocomplete="off"
-                      target="_blank">
-                    <ul class="twidget-form-list clearfix">
-                        <li class="twidget-origin">
-                            <div class="twidget-input-box" select-input=""><label for="twidget-origin">Город
-                                вылета</label>
-                                <!--<input-->
-                                        <!--type="text" id="twidget-origin" placeholder="Город вылета"-->
-                                        <!--required="" ng-model="formData.origin.city_name">-->
-                                <autocomplete ng-model="yourchoice" data="$ctrl.autocompleteResults" on-type="updateAutocompleteResults"></autocomplete>
-
-                                <div class="twidget-pseudo-input"><span
-                                        class="twidget-pseudo-name"> {{$ctrl.formData.origin.city_name}}</span><span
-                                        class="twidget-pseudo-country-name">,  {{$ctrl.formData.origin.country_name}}</span>
-                                </div>
-                            </div>
-                            <div class="twidget-origin-iata"> {{$ctrl.formData.origin.code}}</div>
-                            <div class="twidget-auto-fill-wrapper" data-type="avia">
-                                <ul></ul>
-                            </div>
-                        </li>
-                        <li class="twidget-destination ">
-                            <div class="twidget-input-box" select-input><label for="twidget-origin">Город
-                                прибытия</label>
-                                <input
-                                        type="text" id="twidget-destination" placeholder="Город вылета"
-                                        required="" ng-model="formData.destination.city_name">
-                                <div class="twidget-pseudo-input"><span
-                                        class="twidget-pseudo-name"> {{$ctrl.formData.destination.city_name}}</span><span
-                                        class="twidget-pseudo-country-name">,  {{$ctrl.formData.destination.country_name}}</span>
-                                </div>
-                            </div>
-                            <div class="twidget-origin-iata"> {{$ctrl.formData.destination.code}}</div>
-                            <div class="twidget-auto-fill-wrapper" data-type="avia">
-                                <ul></ul>
-                            </div>
-                        </li>
-                        <li class="twidget-flight-dates input-daterange input-group clearfix">
-                            <search-form-datepicker-input
-                                    class="twidget-dep-date twidget-form-item"
-                                    label="'Туда'"
-                                    dates="$ctrl.dates"
-                                    key="'rangeStart'"
-                            ></search-form-datepicker-input>
-                            <search-form-datepicker-input
-                                    class="twidget-return-date twidget-form-item"
-                                    label="'Обратно'"
-                                    dates="$ctrl.dates"
-                                    key="'rangeEnd'"
-                            ></search-form-datepicker-input>
-                        </li>
-                        <li class="twidget-passengers">
-                            <passengers passengers="$ctrl.formData.passengers"
-                                        trip-class="$ctrl.formData.trip_class"></passengers>
-                        </li>
-                        <li class="twidget-submit-button">
-                            <button type="submit">Найти билеты</button>
-                        </li>
-                        {{$ctrl.formData.origin}}
-                        {{$ctrl.formData.destination}}
-                    </ul>
-                </form>
+                <ul class="twidget-form-list clearfix">
+                    <li class="twidget-origin">
+                        <city-autocomplete value="$ctrl.formData.origin" label="'Город отправления'">
+                        </city-autocomplete>
+                    </li>
+                    <li class="twidget-destination">
+                        <city-autocomplete value="$ctrl.formData.destination" label="'Город прибытия'">
+                        </city-autocomplete>
+                    </li>
+                    <li class="twidget-flight-dates input-daterange input-group clearfix">
+                        <search-form-datepicker-input
+                                class="twidget-dep-date twidget-form-item"
+                                label="'Туда'"
+                                dates="$ctrl.dates"
+                                key="'rangeStart'"
+                        ></search-form-datepicker-input>
+                        <search-form-datepicker-input
+                                class="twidget-return-date twidget-form-item"
+                                label="'Обратно'"
+                                dates="$ctrl.dates"
+                                key="'rangeEnd'"
+                        ></search-form-datepicker-input>
+                    </li>
+                    <li class="twidget-passengers">
+                        <passengers passengers="$ctrl.formData.passengers"
+                                    trip-class="$ctrl.formData.trip_class"></passengers>
+                    </li>
+                    <li class="twidget-submit-button">
+                        <button>Найти билеты</button>
+                    </li>
+                </ul>
                 <div class="twidget-tab-bottom"></div>
             </div>
         </div>
