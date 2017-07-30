@@ -1,6 +1,6 @@
-<li class="clearfix">
-    <span class="twidget-city-name">{{suggestion.city_name}}, <span>{{suggestion.country_name}}</span></span><span
-        class="twidget-num-hotel">{{suggestion.code}}</span>
-    <span class="twidget-city-airport-name" ng-show="suggestion.name">{{suggestion.name}}</span>
-    <span class="twidget-city-airport-name" ng-hide="suggestion.name">Все аэропорты</span>
-</li>
+<div class="twidget-suggestion {{(!suggestion.name.length) ? 'twidget-suggestion-is-city' :''}}">
+    <span class="twidget-suggestion-code twidget-suggestion-text-mute">{{suggestion.code}}</span>
+    <span class="twidget-suggestion-name">{{suggestion.city_name}}, <span
+            class="twidget-suggestion-country twidget-suggestion-text-mute">{{suggestion.country_name}}</span></span>
+    <span class="twidget-suggestion-airport-name twidget-suggestion-text-mute">{{(suggestion.name.length> 0) ? suggestion.name : 'Все аэропорты'}}</span>
+</div>

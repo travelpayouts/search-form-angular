@@ -4,7 +4,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         value: '=',
         label: '<'
     },
-    controller: function ($http, $scope, $sce, $q, $interpolate) {
+    controller: function ($http, $scope, $sce, $q, $interpolate, $compile) {
         var self = this;
         self.lang = 'ru';
         self.typedValue = '';
