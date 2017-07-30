@@ -1,17 +1,17 @@
 <div class="twidget-input-box">
-    <label ng-click="$ctrl.popover.toggle()">{{$ctrl.label}}</label>
+    <label ng-click="$ctrl.popover.toggle()">{{$ctrl.parent.translate($ctrl.label)}}</label>
     <div class="twidget-input-box-show-popup" ng-click="$ctrl.popover.toggle()">
         <input type="text">
-        <div class="twidget-icon-cal" ng-hide="$ctrl.dates[$ctrl.key]"></div>
+        <div class="twidget-icon-cal" ng-hide="$ctrl.value"></div>
         <span class="twidget-date-text twidget-date-depart"
-              ng-hide="$ctrl.dates[$ctrl.key]"
-        >{{$ctrl.label}}</span>
-        <span ng-show="$ctrl.dates[$ctrl.key]"
+              ng-hide="$ctrl.value"
+        >{{$ctrl.parent.translate($ctrl.label)}}</span>
+        <span ng-show="$ctrl.value"
               class="twidget-date-text twidget-date-depart"
-        >{{$ctrl.dates[$ctrl.key]  | date:"d MMMM, EEE"}}</span>
+        >{{$ctrl.value  | date:"d MMMM, EEE"}}</span>
     </div>
-    <div class="twidget-icon-delete" ng-show="$ctrl.dates[$ctrl.key]"
-         ng-click="$ctrl.dates[$ctrl.key]=null;"></div>
+    <div class="twidget-icon-delete" ng-show="$ctrl.value"
+         ng-click="$ctrl.value=null;"></div>
 </div>
 
 

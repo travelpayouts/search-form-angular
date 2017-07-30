@@ -1,14 +1,16 @@
-var moment = require('moment');
-require('moment/locale/ru');
 
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('searchFormDatepickerInput', {
     template: require('../templates/datepicker-input.html'),
     bindings: {
         dates: '=',
+        value: '=',
         showPopup: '&',
         label: '<',
         key: '<'
 
+    },
+    require: {
+        parent: '^^searchForm'
     },
     controller: function ($scope, $element, $popover) {
         var el = $element;
@@ -19,8 +21,15 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             options: {startView: 'day', minView: 'day'}
         };
         self.$onInit = function () {
+            if(self.parent.lang === 'ru'){
+                var lang = require('moment/locale/ru');
+                moment.locale('ru',lang);
+            }
             self.date = self.dates[self.key];
             self.pickerParams.model = self.dates[self.key];
+            if(self.value !== undefined && typeof self.value === 'string'){
+                self.value = moment(self.value, "DD-MM-YYYY").valueOf();
+            }
             var dateParams;
             if (self.key === 'rangeStart') {
                 dateParams = {
@@ -44,7 +53,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 template: require('../templates/datepicker-popover.html'),
                 autoClose: true,
                 placement: 'bottom-left',
-                container: 'body',
+                // container: 'body',
                 trigger: 'manual',
                 scope: $scope,
             }),
@@ -55,7 +64,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         };
 
         function startRangeSetTime() {
-            if (self.dates.rangeEnd === null) {
+            if (self.dates.return_date === null) {
                 // self.showPopupById('rangeEnd');
             }
             self.popover.el.hide();
@@ -74,8 +83,8 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 date.selectable = false;
             });
 
-            if (self.dates.rangeEnd && self.dates.rangeStart) {
-                var activeDate = moment(self.dates.rangeEnd);
+            if (self.dates.return_date && self.dates.depart_date) {
+                var activeDate = moment(self.dates.return_date);
 
                 $dates.filter(function (date) {
                     return date.localDateValue() >= activeDate.valueOf()
@@ -94,8 +103,8 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 date.selectable = false;
             });
 
-            if (self.dates.rangeStart) {
-                var activeDate = moment(self.dates.rangeStart).subtract(1, $view).add(1, 'minute');
+            if (self.dates.depart_date) {
+                var activeDate = moment(self.dates.depart_date).subtract(1, $view).add(1, 'minute');
 
                 $dates.filter(function (date) {
                     return date.localDateValue() <= activeDate.valueOf()
@@ -110,9 +119,9 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
          * @param dates
          */
         function setRange(dates) {
-            if (self.dates.rangeStart && self.dates.rangeEnd) {
-                var rangeStart = moment(self.dates.rangeStart);
-                var rangeEnd = moment(self.dates.rangeEnd);
+            if (self.dates.depart_date && self.dates.return_date) {
+                var rangeStart = moment(self.dates.depart_date);
+                var rangeEnd = moment(self.dates.return_date);
                 var rangeDates = dates.filter(function (date) {
                     return date.localDateValue() >= rangeStart.valueOf() && date.localDateValue() <= rangeEnd.valueOf();
                 });

@@ -1,14 +1,14 @@
 <div class="twidget-input-box" select-input>
-    <label>{{$ctrl.label}}</label>
+    <label>{{$ctrl.parent.translate($ctrl.label)}}</label>
     <div mass-autocomplete class="twidget-autocomplete">
         <input type="text" ng-model="$ctrl.typedValue"
-               placeholder="{{$ctrl.label}}"
+               placeholder="{{$ctrl.parent.translate($ctrl.label)}}"
                ng-change="$ctrl.onChange($ctrl.typedValue)"
                mass-autocomplete-item="$ctrl.options">
     </div>
     <div class="twidget-pseudo-input">
-        <span class="twidget-pseudo-name"> {{$ctrl.newValue.obj.city_name}}</span>
-        <span class="twidget-pseudo-country-name">,  {{$ctrl.newValue.obj.country_name}}</span>
+        <span class="twidget-pseudo-name"> {{$ctrl.value.obj.city_name}}</span>
+        <span class="twidget-pseudo-country-name">,  {{$ctrl.value.obj.country_name}}</span>
     </div>
 </div>
-<div class="twidget-origin-iata"> {{$ctrl.newValue.obj.code}}</div>
+<div class="twidget-origin-iata"> {{$ctrl.value.obj.code}}</div>

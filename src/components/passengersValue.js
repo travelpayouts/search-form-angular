@@ -1,6 +1,6 @@
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('passengersValue', {
     template: require('../templates/passengers-age-select.html'),
-    require: '^passengers',
+    require: '^^passengers',
     bindings: {
         field: '@',
         passengers: '=',

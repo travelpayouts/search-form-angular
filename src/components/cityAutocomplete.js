@@ -1,13 +1,50 @@
+// Using filter polyfill
+var filter = require('array-filter');
+
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('cityAutocomplete', {
     template: require('../templates/city-autocomplete.html'),
     bindings: {
         value: '=',
-        label: '<'
+        label: '=',
+        key: '<',
+        lang: '<'
     },
-    controller: function ($http, $scope, $sce, $q, $interpolate, $compile) {
+    require: {
+        parent: '^^searchForm'
+    },
+    controller: function ($http, $scope, $sce, $q, $interpolate, $timeout,translateFactory) {
         var self = this;
-        self.lang = 'ru';
         self.typedValue = '';
+
+        /**
+         * Get city info by user location
+         */
+        function fetchUserLocation() {
+            return $http({
+                method: 'GET',
+                url: 'https://www.travelpayouts.com/whereami',
+                params: {locale: translateFactory.locale}
+            });
+        }
+
+        /**
+         * Get city info by IATA code
+         * @param id
+         */
+        function getCityById(id) {
+            return autoCompleteRequest(id).then(function successCallback(response) {
+                var filteredData = filter(response.data, function (el, i, arr) {
+                    return ('code' in el && el.code === id);
+                });
+                if (filteredData.length > 0) {
+                    return filteredData[0];
+                }
+                return false;
+            }, function errorCallback(response) {
+                return false;
+            });
+        }
+
 
         /**
          *
@@ -19,7 +56,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 method: 'GET',
                 url: 'https://autocomplete.travelpayouts.com/jravia',
                 params: {
-                    locale: self.lang,
+                    locale: translateFactory.locale,
                     with_countries: false,
                     q: query
                 }
@@ -49,16 +86,62 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
 
         self.newValue = {};
         self.onChange = function (query) {
-            if (query !== self.newValue.value) {
-                self.newValue = {};
+            if (self.value !== undefined && query !== self.value.value) {
+                self.value = {};
             }
         };
 
         self.options = {
             suggest: suggest,
             on_select: function (selected) {
-                self.newValue = selected;
+                self.value = selected;
             },
         };
+
+
+        self.$onInit = function () {
+            if (self.value !== undefined && typeof self.value === 'string') {
+                getCityById(self.value).then(function (cityInfo) {
+                    self.typedValue = cityInfo.city_name;
+                    self.value = {
+                        title: cityInfo.city_name,
+                        obj: cityInfo
+                    };
+                });
+            } else {
+                if (self.key !== undefined && self.key === 'origin') {
+                    /**
+                     * Set default origin by user location
+                     */
+                    fetchUserLocation().then(function (cityInfo) {
+                        self.typedValue = cityInfo.data.name;
+                        self.value = {
+                            title: cityInfo.data.name,
+                            obj: {
+                                code: cityInfo.data.iata,
+                                country_name: cityInfo.data.country_name,
+                                city_name: cityInfo.data.name,
+                            }
+                        };
+                    });
+
+                }
+            }
+        };
+
+        self.$onChanges = function () {
+            if (self.value !== undefined && typeof self.value !== 'string') {
+                getCityById(self.value.obj.code).then(function (cityInfo) {
+                    self.typedValue = cityInfo.city_name;
+                    self.value = {
+                        title: cityInfo.city_name,
+                        obj: cityInfo
+                    };
+                });
+            }
+
+
+        };
+
     }
 });

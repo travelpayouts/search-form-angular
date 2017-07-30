@@ -3,17 +3,20 @@
         <div class="twidget-passenger-form-wrapper">
             <ul class="twidget-age-group">
                 <li>
-                    <div class="twidget-cell twidget-age-name">Взрослые</div>
+                    <div class="twidget-cell twidget-age-name"><span
+                            ng-bind-html="$ctrl.parent.translate('avia_passengers_select_adults')"></span></div>
                     <passengers-value field="adults" passengers="$ctrl.passengers"
                                       value="$ctrl.passengers.adults"></passengers-value>
                 </li>
                 <li>
-                    <div class="twidget-cell twidget-age-name">Дети до 12 лет</div>
+                    <div class="twidget-cell twidget-age-name"><span
+                            ng-bind-html="$ctrl.parent.translate('avia_passengers_select_children')"></span></div>
                     <passengers-value field="children" passengers="$ctrl.passengers"
                                       value="$ctrl.passengers.children"></passengers-value>
                 </li>
                 <li>
-                    <div class="twidget-cell twidget-age-name">Дети до 2 лет</div>
+                    <div class="twidget-cell twidget-age-name"><span
+                            ng-bind-html="$ctrl.parent.translate('avia_passengers_select_infants')"></span></div>
                     <passengers-value field="infants" passengers="$ctrl.passengers"
                                       value="$ctrl.passengers.infants"></passengers-value>
                 </li>
@@ -23,14 +26,14 @@
                      ng-class="{'twidget-pass-check-checked':$ctrl.tripClass == 1}">
                     <label>
                         <input type="checkbox" ng-model="$ctrl.tripClass" ng-true-value="1"
-                               ng-false-value="0">
-                        Перелет
-                        бизнес-классом</label>
+                               ng-false-value="0"> {{$ctrl.parent.translate('avia_passengers_business_class_checkbox')}}</label>
                 </div>
             </div>
             <ul class="twidget-age-group">
                 <li class="twidget-passengers-ready-button-wrapper">
-                    <div ng-click="$hide();" class="twidget-passengers-ready-button">Готово</div>
+                    <div ng-click="$hide();" class="twidget-passengers-ready-button">
+                        {{$ctrl.parent.translate('avia_passengers_select_ready_button')}}
+                    </div>
                 </li>
             </ul>
         </div>

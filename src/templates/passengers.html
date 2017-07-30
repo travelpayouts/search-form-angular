@@ -1,10 +1,11 @@
 <div>
-    <label for="twidget-passengers-detail">Пассажиры/Класс</label>
+    <label>{{$ctrl.parent.translate('avia_passengers_select_caption')}}</label>
     <div class="twidget-passengers-detail"
          ng-class="{'active':$ctrl.active}">
         <div class="twidget-pas-no"><span id="twidget-pas">{{$ctrl.getSum()}}</span>
-            <span class="twidget-pas-caption">пассажир</span>
+            <span class="twidget-pas-caption">{{$ctrl.passengersPlural()}}</span>
         </div>
-        <div class="twidget-class">эконом {{$ctrl.tripClass}}</div>
+        <div class="twidget-class">{{$ctrl.trip_class}}{{$ctrl.getTripClass($ctrl.tripClass)}}
+        </div>
     </div>
 </div>

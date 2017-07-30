@@ -2,35 +2,28 @@
     <div class="twidget-tabs">
         <div class="twidget-tab-content">
             <div id="twidget-tab1" class="twidget-tab active">
-                <div class="twidget-header" target="_blank"><a
-                        href="https://www.aviasales.ru/?marker=78606"
-                        class="twidget-logo">
-                    <div class="twidget-logo-image twidget-aviasales-logo-img" width="30"
-                         height="30"></div>
-                    aviasales</a> <a href="https://www.aviasales.ru/?marker=78606"
-                                     class="twidget-title">Поиск
-                    дешёвых авиабилетов</a></div>
-                <div class="clearfix"></div>
                 <ul class="twidget-form-list clearfix">
                     <li class="twidget-origin">
-                        <city-autocomplete value="$ctrl.formData.origin" label="'Город отправления'">
+                        <city-autocomplete value="$ctrl.formData.origin" data-key="'origin'" label="'avia_input_origin_label'" lang="$ctrl.lang">
                         </city-autocomplete>
                     </li>
                     <li class="twidget-destination">
-                        <city-autocomplete value="$ctrl.formData.destination" label="'Город прибытия'">
+                        <city-autocomplete value="$ctrl.formData.destination" data-key="'destination'" label="'avia_input_destination_label'" lang="$ctrl.lang">
                         </city-autocomplete>
                     </li>
                     <li class="twidget-flight-dates input-daterange input-group clearfix">
                         <search-form-datepicker-input
                                 class="twidget-dep-date twidget-form-item"
-                                label="'Туда'"
-                                dates="$ctrl.dates"
+                                label="'avia_input_date_start'"
+                                dates="$ctrl.formData"
+                                value="$ctrl.formData.depart_date"
                                 key="'rangeStart'"
                         ></search-form-datepicker-input>
                         <search-form-datepicker-input
                                 class="twidget-return-date twidget-form-item"
-                                label="'Обратно'"
-                                dates="$ctrl.dates"
+                                label="'avia_input_date_end'"
+                                dates="$ctrl.formData"
+                                value="$ctrl.formData.return_date"
                                 key="'rangeEnd'"
                         ></search-form-datepicker-input>
                     </li>
@@ -39,7 +32,8 @@
                                     trip-class="$ctrl.formData.trip_class"></passengers>
                     </li>
                     <li class="twidget-submit-button">
-                        <button>Найти билеты</button>
+                        <button>{{$ctrl.translate('avia_submit_button_text')}}</button>
+
                     </li>
                 </ul>
                 <div class="twidget-tab-bottom"></div>
