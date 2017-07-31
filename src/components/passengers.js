@@ -1,13 +1,15 @@
+var filter = require('array-filter');
+var pick = require('lodash/pick');
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('passengers', {
     template: require('../templates/passengers.html'),
     bindings: {
-        passengers: '=',
+        formData: '=',
         tripClass: '='
     },
     require: {
         parent: '^^searchForm'
     },
-    controller: function ($element, $popover, $scope,$filter) {
+    controller: function ($element, $popover, $scope, $filter) {
         var el = $element;
         var self = this;
         self.active = false;
@@ -15,19 +17,29 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             self.active = !self.active;
         };
 
+        self.getPassengers = function () {
+            return pick(self.formData, ['adults', 'children', 'infants']);
+        };
+
+        self.setPassengers = function () {
+            self.formData = angular.merge(self.formData, self.passengers);
+        };
+
         self.$onInit = function () {
-            if (self.passengers === undefined) {
+            self.passengers = {
+                adults: 1,
+                children: 0,
+                infants: 0
+            };
+            angular.extend(self.passengers, self.getPassengers());
+            self.tripClass = 0;
+        };
 
-                self.passengers = {
-                    adults: 1,
-                    children: 0,
-                    infants: 0
-                };
-                self.tripClass = 0;
-            } else {
+        // Updating FormData on change values
+        self.$doCheck = function (changes) {
+            self.setPassengers();
+        };
 
-            }
-        }
         $popover(el, {
             template: require('../templates/passengers-dropdown.html'),
             autoClose: 1,
@@ -57,12 +69,14 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             return self.parent.translate(result);
         };
 
+
         /**
          * Get sum of all passengers
          * @returns {*}
          */
         self.getSum = function () {
-            var sum = Object.values(self.passengers).reduce(function (pv, cv) {
+            var passengers = pick(self.formData, ['adults', 'children', 'infants']);
+            var sum = Object.values(passengers).reduce(function (pv, cv) {
                 return parseInt(pv) + parseInt(cv);
             }, 0);
             if (isNaN(sum)) {

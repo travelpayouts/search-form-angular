@@ -1,4 +1,6 @@
 require('moment/locale/ru');
+var pick = require('lodash/pick');
+
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('searchForm', {
     template: require('../templates/searchFormComponent.html'),
     bindings: {
@@ -6,35 +8,40 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         params: '=',
         lang: '<',
     },
-    controller: function ($scope, translateFactory, $timeout,$filter) {
+    controller: function ($scope, translateFactory, $timeout, $filter) {
         var self = this;
 
-
-        self.formData = {
-            origin: '',
-            destination: '',
-            passengers: {
-                adults: 1,
-                children: 0,
-                infants: 0,
-            },
-            trip_class: 0,
-            depart_date: null,
-            return_date: null,
-            _origin_code: '',
-            _destination_code: ''
-        };
-
-        self.translate = function(input) {
+        self.translate = function (input) {
             return $filter('translate')(input);
         };
 
-        this.$onInit = function () {
+
+        self.submit = function () {
+            var data = angular.copy(self.formData);
+            var cities = pick(data, ['origin', 'destination']);
+            var dates = pick(data, ['depart_date', 'return_date']);
+
+            angular.forEach(cities, function (value, key) {
+                if (typeof value === 'object') {
+                    data[key] = value.obj.code;
+                }
+            });
+
+            angular.forEach(dates, function (value, key) {
+                if (value != null) {
+                    // data[key] = value.obj.code;
+                    data[key] = moment(value).format("DD-MM-YYYY");
+                }
+            });
+
+        };
+
+        self.$onInit = function () {
             translateFactory.setLocale(self.lang);
             moment.locale(self.lang);
         };
 
-        this.$onChanges = function (changes) {
+        self.$onChanges = function (changes) {
             if (changes.lang !== undefined) {
                 translateFactory.setLocale(changes.lang.currentValue);
                 moment.locale(self.lang);

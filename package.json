@@ -20,6 +20,7 @@
     "bootstrap-datepicker": "^1.7.1",
     "html-loader": "^0.4.5",
     "jquery": "3.2.1",
+    "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "scss": "^0.2.4",
     "style-loader": "^0.18.2",

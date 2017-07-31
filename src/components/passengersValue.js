@@ -1,6 +1,5 @@
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('passengersValue', {
     template: require('../templates/passengers-age-select.html'),
-    require: '^^passengers',
     bindings: {
         field: '@',
         passengers: '=',
@@ -10,6 +9,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         var self = this;
 
         getPassengersSum = function () {
+
             var sum = Object.values(self.passengers).reduce(function (pv, cv) {
                 return parseInt(pv) + parseInt(cv);
             }, 0);

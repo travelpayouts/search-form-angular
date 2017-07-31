@@ -28,11 +28,13 @@
                         ></search-form-datepicker-input>
                     </li>
                     <li class="twidget-passengers">
-                        <passengers passengers="$ctrl.formData.passengers"
+                        <passengers
+                                form-data="$ctrl.formData"
+                                passengers="$ctrl.formData.passengers"
                                     trip-class="$ctrl.formData.trip_class"></passengers>
                     </li>
                     <li class="twidget-submit-button">
-                        <button>{{$ctrl.translate('avia_submit_button_text')}}</button>
+                        <button ng-click="$ctrl.submit()">{{$ctrl.translate('avia_submit_button_text')}}</button>
 
                     </li>
                 </ul>
