@@ -19,29 +19,18 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
 
         self.prepareData = function () {
             var data = angular.copy(self.data);
-            var cities = pick(data, ['origin', 'destination']);
-            var dates = pick(data, ['depart_date', 'return_date']);
-
-            angular.forEach(cities, function (value, key) {
-                if (typeof value === 'object') {
-                    data[key] = value.obj.code;
-                }
-            });
-
-            angular.forEach(dates, function (value, key) {
-                if (value !== null) {
-                    // data[key] = value.obj.code;
-                    data[key] = moment(value).format("YYYY-MM-DD");
-                }
-            });
-
             angular.forEach(data, function (value, key) {
-                if (value !== null) {
+                // Transform cities
+                if ((['origin', 'destination'].indexOf(key) !== -1) && typeof value === 'object') {
+                    data[key] = value.obj.code;
+                } else if ((['depart_date', 'return_date'].indexOf(key) !== -1) && value !== null) {
+                    // Transform dates
+                    data[key] = moment(value).format("YYYY-MM-DD");
+                } else if (value !== null) {
+                    // Any other values to string
                     data[key] = value.toString();
-
                 }
             });
-
             return data;
         };
 
@@ -61,7 +50,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         self.$onChanges = function (changes) {
             if (changes.searchUrl !== undefined) {
                 self.data = angular.copy(self.formData);
-                console.log('newSearch');
                 $scope.$broadcast('newSearch');
             }
             if (changes.lang !== undefined) {
@@ -69,7 +57,5 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 moment.locale(self.lang);
             }
         };
-
-
     }
 });
