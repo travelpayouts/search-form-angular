@@ -62,7 +62,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
          */
         self.getSum = function () {
             var passengers = pick(self.formData, ['adults', 'children', 'infants']);
-            var sum = Object.values(passengers).reduce(function (pv, cv) {
+            var sum = Object.values(self.passengers).reduce(function (pv, cv) {
                 return parseInt(pv) + parseInt(cv);
             }, 0);
             if (isNaN(sum)) {
@@ -88,6 +88,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
 
         self.$onInit = function () {
             self.initValues();
+
         };
 
         $scope.$on('updatePassengers', function () {
@@ -97,7 +98,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         });
 
         $scope.$on('newSearch', function () {
-            console.log('passnew');
             $timeout(function () {
                 self.initValues();
             }, 200);
