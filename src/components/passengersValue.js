@@ -5,7 +5,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         passengers: '=',
         value: '='
     },
-    controller: function () {
+    controller: function ($scope) {
         var self = this;
 
         getPassengersSum = function () {
@@ -36,6 +36,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             if (self.field === 'infants' && self.value < getMaxInfants() && getPassengersSum() < 9) { // max infants = current adults
                 self.value++;
             }
+            $scope.$emit('updatePassengers');
         };
 
         self.remove = function () {
@@ -53,6 +54,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             } else {
                 self.value = 0;
             }
+            $scope.$emit('updatePassengers');
         };
 
     }

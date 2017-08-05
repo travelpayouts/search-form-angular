@@ -2,42 +2,49 @@
     <div class="twidget-tabs">
         <div class="twidget-tab-content">
             <div id="twidget-tab1" class="twidget-tab active">
-                <ul class="twidget-form-list clearfix">
-                    <li class="twidget-origin">
-                        <city-autocomplete value="$ctrl.formData.origin" data-key="'origin'" label="'avia_input_origin_label'" lang="$ctrl.lang">
-                        </city-autocomplete>
-                    </li>
-                    <li class="twidget-destination">
-                        <city-autocomplete value="$ctrl.formData.destination" data-key="'destination'" label="'avia_input_destination_label'" lang="$ctrl.lang">
-                        </city-autocomplete>
-                    </li>
-                    <li class="twidget-flight-dates input-daterange input-group clearfix">
-                        <search-form-datepicker-input
-                                class="twidget-dep-date twidget-form-item"
-                                label="'avia_input_date_start'"
-                                dates="$ctrl.formData"
-                                value="$ctrl.formData.depart_date"
-                                key="'rangeStart'"
-                        ></search-form-datepicker-input>
-                        <search-form-datepicker-input
-                                class="twidget-return-date twidget-form-item"
-                                label="'avia_input_date_end'"
-                                dates="$ctrl.formData"
-                                value="$ctrl.formData.return_date"
-                                key="'rangeEnd'"
-                        ></search-form-datepicker-input>
-                    </li>
-                    <li class="twidget-passengers">
-                        <passengers
-                                form-data="$ctrl.formData"
-                                passengers="$ctrl.formData.passengers"
-                                    trip-class="$ctrl.formData.trip_class"></passengers>
-                    </li>
-                    <li class="twidget-submit-button">
-                        <button ng-click="$ctrl.submit()">{{$ctrl.translate('avia_submit_button_text')}}</button>
-
-                    </li>
-                </ul>
+                <form ng-submit="$ctrl.submit()">
+                    <ul class="twidget-form-list clearfix">
+                        <li class="twidget-origin">
+                            <city-autocomplete
+                                    value="$ctrl.data.origin"
+                                    data-key="'origin'"
+                                    label="'avia_input_origin_label'">
+                            </city-autocomplete>
+                        </li>
+                        <li class="twidget-destination">
+                            <city-autocomplete
+                                    value="$ctrl.data.destination"
+                                    data-key="'destination'"
+                                    label="'avia_input_destination_label'">
+                            </city-autocomplete>
+                        </li>
+                        <li class="twidget-flight-dates input-daterange input-group clearfix">
+                            <search-form-datepicker-input
+                                    class="twidget-dep-date twidget-form-item"
+                                    label="'avia_input_date_start'"
+                                    dates="$ctrl.data"
+                                    value="$ctrl.data.depart_date"
+                                    key="'rangeStart'"
+                            ></search-form-datepicker-input>
+                            <search-form-datepicker-input
+                                    class="twidget-return-date twidget-form-item"
+                                    label="'avia_input_date_end'"
+                                    dates="$ctrl.data"
+                                    value="$ctrl.data.return_date"
+                                    key="'rangeEnd'"
+                            ></search-form-datepicker-input>
+                        </li>
+                        <li class="twidget-passengers">
+                            <passengers
+                                    form-data="$ctrl.data"
+                                    passengers="$ctrl.data.passengers"
+                                    trip-class="$ctrl.data.trip_class"></passengers>
+                        </li>
+                        <li class="twidget-submit-button">
+                            <button>{{$ctrl.translate('avia_submit_button_text')}}</button>
+                        </li>
+                    </ul>
+                </form>
                 <div class="twidget-tab-bottom"></div>
             </div>
         </div>

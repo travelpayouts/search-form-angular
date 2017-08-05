@@ -9,7 +9,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
     require: {
         parent: '^^searchForm'
     },
-    controller: function ($element, $popover, $scope, $filter) {
+    controller: function ($element, $popover, $scope, $filter, $timeout) {
         var el = $element;
         var self = this;
         self.active = false;
@@ -25,20 +25,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             self.formData = angular.merge(self.formData, self.passengers);
         };
 
-        self.$onInit = function () {
-            self.passengers = {
-                adults: 1,
-                children: 0,
-                infants: 0
-            };
-            angular.extend(self.passengers, self.getPassengers());
-            self.tripClass = 0;
-        };
-
-        // Updating FormData on change values
-        self.$doCheck = function (changes) {
-            self.setPassengers();
-        };
 
         $popover(el, {
             template: require('../templates/passengers-dropdown.html'),
@@ -84,5 +70,37 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             }
             return sum;
         };
+
+        self.initValues = function () {
+            self.passengers = {
+                adults: 1,
+                children: 0,
+                infants: 0
+            };
+            angular.merge(self.passengers, self.getPassengers());
+
+            if (self.formData.trip_class === undefined) {
+                self.tripClass = 0;
+            } else {
+                self.tripClass = parseInt(self.formData.trip_class);
+            }
+        };
+
+        self.$onInit = function () {
+            self.initValues();
+        };
+
+        $scope.$on('updatePassengers', function () {
+            $timeout(function () {
+                self.setPassengers();
+            }, 200);
+        });
+
+        $scope.$on('newSearch', function () {
+            console.log('passnew');
+            $timeout(function () {
+                self.initValues();
+            }, 200);
+        });
     }
 });

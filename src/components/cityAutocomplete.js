@@ -6,13 +6,12 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
     bindings: {
         value: '=',
         label: '=',
-        key: '<',
-        lang: '<'
+        key: '<'
     },
     require: {
         parent: '^^searchForm'
     },
-    controller: function ($http, $scope, $sce, $q, $interpolate, $timeout,translateFactory) {
+    controller: function ($http, $scope, $sce, $q, $interpolate, $timeout, translateFactory) {
         var self = this;
         self.typedValue = '';
 
@@ -44,7 +43,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 return false;
             });
         }
-
 
         /**
          *
@@ -85,6 +83,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
         };
 
         self.newValue = {};
+
         self.onChange = function (query) {
             if (self.value !== undefined && query !== self.value.value) {
                 self.value = {};
@@ -98,8 +97,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             },
         };
 
-
-        self.$onInit = function () {
+        self.initValues = function () {
             if (self.value !== undefined && typeof self.value === 'string') {
                 getCityById(self.value).then(function (cityInfo) {
                     self.typedValue = cityInfo.city_name;
@@ -129,7 +127,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             }
         };
 
-        self.$onChanges = function () {
+        self.$onChanges = function (changes) {
             if (self.value !== undefined && typeof self.value !== 'string') {
                 getCityById(self.value.obj.code).then(function (cityInfo) {
                     self.typedValue = cityInfo.city_name;
@@ -139,9 +137,16 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                     };
                 });
             }
-
-
         };
 
+        self.$onInit = function () {
+            self.initValues();
+        };
+
+        $scope.$on('newSearch', function () {
+            $timeout(function () {
+                self.initValues();
+            }, 200);
+        });
     }
 });

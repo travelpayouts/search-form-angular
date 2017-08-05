@@ -28,7 +28,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             self.date = self.dates[self.key];
             self.pickerParams.model = self.dates[self.key];
             if(self.value !== undefined && typeof self.value === 'string'){
-                self.value = moment(self.value, "DD-MM-YYYY").valueOf();
+                self.value = moment(self.value, "YYYY-MM-DD").valueOf();
             }
             var dateParams;
             if (self.key === 'rangeStart') {
