@@ -32,7 +32,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             onShow: self.toggle,
             onHide: self.toggle,
             placement: 'bottom-left',
-            container: 'body',
             trigger: 'click',
             scope: $scope
         });

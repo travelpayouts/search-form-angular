@@ -26,7 +26,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 } else if ((['depart_date', 'return_date'].indexOf(key) !== -1) && value !== null) {
                     // Transform dates
                     data[key] = moment(value).format("YYYY-MM-DD");
-                } else if (value !== null) {
+                } else if (typeof value === 'number') {
                     // Any other values to string
                     data[key] = value.toString();
                 }
