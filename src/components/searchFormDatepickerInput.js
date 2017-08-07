@@ -1,4 +1,3 @@
-
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('searchFormDatepickerInput', {
     template: require('../templates/datepicker-input.html'),
     bindings: {
@@ -21,15 +20,20 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             options: {startView: 'day', minView: 'day'}
         };
         self.$onInit = function () {
-            if(self.parent.lang === 'ru'){
+            if (self.parent.lang === 'ru') {
                 var lang = require('moment/locale/ru');
-                moment.locale('ru',lang);
+                moment.locale('ru', lang);
             }
             self.date = self.dates[self.key];
             self.pickerParams.model = self.dates[self.key];
-            if(self.value !== undefined && typeof self.value === 'string'){
+            if (self.value !== undefined && typeof self.value === 'string') {
                 self.value = moment(self.value, "YYYY-MM-DD").valueOf();
             }
+            // Set default min value
+            if (self.value === undefined && self.key === 'rangeStart') {
+                self.value = moment().valueOf();
+            }
+
             var dateParams;
             if (self.key === 'rangeStart') {
                 dateParams = {

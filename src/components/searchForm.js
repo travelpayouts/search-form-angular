@@ -22,7 +22,11 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             angular.forEach(data, function (value, key) {
                 // Transform cities
                 if ((['origin', 'destination'].indexOf(key) !== -1) && typeof value === 'object') {
-                    data[key] = value.obj.code;
+                    if (value.obj !== undefined && value.obj.code !== undefined) {
+                        data[key] = value.obj.code;
+                    } else {
+                        data[key] = undefined;
+                    }
                 } else if ((['depart_date', 'return_date'].indexOf(key) !== -1) && value !== null) {
                     // Transform dates
                     data[key] = moment(value).format("YYYY-MM-DD");
