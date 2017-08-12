@@ -1,4 +1,3 @@
-require('moment/locale/ru');
 var pick = require('lodash/pick');
 
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('searchForm', {

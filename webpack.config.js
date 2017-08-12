@@ -67,7 +67,7 @@ module.exports = function makeWebpackConfig() {
             }),
             new ExtractTextPlugin({filename: "[name].styles.css", allChunks: true}),
             new NpmInstallPlugin(),
-            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(ru|en)/),
+            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en|ru)/),
         ],
         externals: {
             'angular': 'angular',

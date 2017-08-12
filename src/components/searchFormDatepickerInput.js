@@ -20,10 +20,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             options: {startView: 'day', minView: 'day'}
         };
         self.$onInit = function () {
-            if (self.parent.lang === 'ru') {
-                var lang = require('moment/locale/ru');
-                moment.locale('ru', lang);
-            }
             self.date = self.dates[self.key];
             self.pickerParams.model = self.dates[self.key];
             if (self.value !== undefined && typeof self.value === 'string') {
