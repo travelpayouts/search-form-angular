@@ -8670,7 +8670,7 @@ angular.module('mgcrea.ngStrap.tooltip', [ 'mgcrea.ngStrap.core', 'mgcrea.ngStra
 /* 40 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"twidget-suggestion {{(!suggestion.name.length) ? 'twidget-suggestion-is-city' :''}}\"> <span class=\"twidget-suggestion-code twidget-suggestion-text-mute\">{{suggestion.code}}</span> <span class=twidget-suggestion-name>{{suggestion.city_name}}, <span class=\"twidget-suggestion-country twidget-suggestion-text-mute\">{{suggestion.country_name}}</span></span> <span class=\"twidget-suggestion-airport-name twidget-suggestion-text-mute\">{{(suggestion.name.length> 0) ? suggestion.name : 'Все аэропорты'}}</span> </div>";
+module.exports = "<div class=\"twidget-suggestion {{(!suggestion.name.length) ? 'twidget-suggestion-is-city' :''}}\"> <span class=\"twidget-suggestion-code twidget-suggestion-text-mute\">{{suggestion.code}}</span> <span class=twidget-suggestion-name>{{suggestion.city_name}}, <span class=\"twidget-suggestion-country twidget-suggestion-text-mute\">{{suggestion.country_name}}</span></span> <span class=\"twidget-suggestion-airport-name twidget-suggestion-text-mute\">{{suggestion.name}}</span> </div>";
 
 /***/ }),
 /* 41 */
@@ -10691,7 +10691,7 @@ webpackContext.id = 111;
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Using filter polyfill
+ // Using filter polyfill
 var filter = __webpack_require__(15);
 
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('cityAutocomplete', {
@@ -10761,6 +10761,9 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 angular.forEach(response.data, function (suggestion) {
                     // new scope for current suggestion
                     var suggestionScope = $scope.$new(true);
+                    if(suggestion.name === null){
+                        suggestion.name = self.parent.translate('avia_all_airports_caption');
+                    }
                     suggestionScope.suggestion = suggestion;
                     // Complile template to html string
                     var suggestionLabel = $interpolate(__webpack_require__(40))(suggestionScope);
@@ -11125,7 +11128,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             }
             // Set default min value
             if (self.value === undefined && self.key === 'rangeStart') {
-                self.value = moment().valueOf();
+                self.value = moment().startOf('day').valueOf();
             }
 
             var dateParams;

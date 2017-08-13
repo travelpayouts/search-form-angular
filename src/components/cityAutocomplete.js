@@ -1,4 +1,4 @@
-// Using filter polyfill
+ // Using filter polyfill
 var filter = require('array-filter');
 
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('cityAutocomplete', {
@@ -68,6 +68,9 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
                 angular.forEach(response.data, function (suggestion) {
                     // new scope for current suggestion
                     var suggestionScope = $scope.$new(true);
+                    if(suggestion.name === null){
+                        suggestion.name = self.parent.translate('avia_all_airports_caption');
+                    }
                     suggestionScope.suggestion = suggestion;
                     // Complile template to html string
                     var suggestionLabel = $interpolate(require('../templates/autocomplete-suggestion.html'))(suggestionScope);

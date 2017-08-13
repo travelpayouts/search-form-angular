@@ -27,7 +27,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             }
             // Set default min value
             if (self.value === undefined && self.key === 'rangeStart') {
-                self.value = moment().valueOf();
+                self.value = moment().startOf('day').valueOf();
             }
 
             var dateParams;
