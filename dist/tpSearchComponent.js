@@ -11278,10 +11278,10 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').directive(
         restrict: 'A',
         link: function (scope, element, attrs) {
             element.on('click', function () {
-                var input = $(element).find(document.getElementsByTagName('input'));
+                var input = element.find(document.getElementsByTagName('input'));
                 if (!$window.getSelection().toString()) {
                     // Required for mobile Safari
-                    $(input[0]).focus();
+                    angular.element(input[0]).focus();
                     input[0].setSelectionRange(0, input[0].value.length)
                 }
             });
@@ -11379,38 +11379,23 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').factory('t
 
 module.exports = {
     avia_tab_caption: 'FLIGHT',
-    hotel_tab_caption: 'HOTEL',
     avia_logo_caption: 'Cheap flights and airline tickets',
-    hotel_logo_caption: 'Search and compare hotel prices',
     avia_input_origin_label: 'Origin',
     avia_input_destination_label: 'Destination',
-    hotel_input_destination_label: 'City or hotel name',
-    hotels_count_caption_1: 'hotel',
-    hotels_count_caption_2: 'hotels',
-    hotels_count_caption_5: 'hotels',
     avia_input_date_start: 'Depart date',
     avia_input_date_end: 'Return date',
-    hotel_input_date_start: 'Check In',
-    hotel_input_date_end: 'Check Out',
     avia_passengers_select_caption: 'Passengers/Class',
-    hotel_guests_select_caption: 'Guests',
     avia_passengers_caption_1: 'passenger',
     avia_passengers_caption_2: 'passengers',
     avia_passengers_caption_5: 'passengers',
-    hotel_guests_caption_1: 'guest',
-    hotel_guests_caption_2: 'guests',
-    hotel_guests_caption_5: 'guests',
     avia_passengers_select_adults: 'Adults',
     avia_passengers_select_children: 'Children to 12<br>years',
-    hotel_guests_select_children: 'Children to 17<br>years',
-    hotel_guests_select_children_age: 'Age',
     avia_passengers_select_infants: 'Infants to 2<br>years',
     avia_passengers_economy_class: 'economy class',
     avia_passengers_business_class: 'business class',
     avia_passengers_business_class_checkbox: 'Business class',
     avia_passengers_select_ready_button: 'Done',
     avia_submit_button_text: 'Search',
-    hotel_submit_button_text: 'Search',
     avia_all_airports_caption: 'All airports',
     datepicker_language: 'en',
     datepicker_return_ticket_caption: 'Return ticket not needed',
@@ -11418,7 +11403,6 @@ module.exports = {
     month_names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     avia_logo_link: 'https://www.jetradar.com/',
     avia_logo_content: '<div class="twidget-logo-image twidget-jetradar-logo-img" width="30" height="30"></div>jetradar',
-    hotel_logo_link: 'https://hotellook.com/',
     avia_submit_domain : 'https://jetradar.com/searches/new'
 };
 
@@ -11428,38 +11412,23 @@ module.exports = {
 
 module.exports = {
     avia_tab_caption: 'Авиабилеты',
-    hotel_tab_caption: 'Отели',
     avia_logo_caption: 'Поиск дешёвых авиабилетов',
-    hotel_logo_caption: 'Поиск дешёвых отелей',
     avia_input_origin_label: 'Город вылета',
     avia_input_destination_label: 'Город прибытия',
-    hotel_input_destination_label: 'Город или отель',
-    hotels_count_caption_1: 'отель',
-    hotels_count_caption_2: 'отеля',
-    hotels_count_caption_5: 'отелей',
     avia_input_date_start: 'Туда',
     avia_input_date_end: 'Обратно',
-    hotel_input_date_start: 'Прибытие',
-    hotel_input_date_end: 'Выезд',
     avia_passengers_select_caption: 'Пассажиры/Класс',
-    hotel_guests_select_caption: 'Гости',
     avia_passengers_caption_1: 'пассажир',
     avia_passengers_caption_2: 'пассажира',
     avia_passengers_caption_5: 'пассажиров',
-    hotel_guests_caption_1: 'гость',
-    hotel_guests_caption_2: 'гостя',
-    hotel_guests_caption_5: 'гостей',
     avia_passengers_select_adults: 'Взрослые',
     avia_passengers_select_children: 'Дети до 12 лет',
-    hotel_guests_select_children: 'Дети до 17 лет',
-    hotel_guests_select_children_age: 'Возраст',
     avia_passengers_select_infants: 'Дети до 2 лет',
     avia_passengers_economy_class: 'эконом',
     avia_passengers_business_class: 'бизнес-класс',
     avia_passengers_business_class_checkbox: 'Перелет бизнес-классом',
     avia_passengers_select_ready_button: 'Готово',
     avia_submit_button_text: 'Найти билеты',
-    hotel_submit_button_text: 'Узнать цены',
     avia_all_airports_caption: 'Все аэропорты',
     datepicker_language: 'ru',
     datepicker_return_ticket_caption: 'Обратный билет не нужен',
@@ -11467,7 +11436,6 @@ module.exports = {
     month_names: ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
     avia_logo_link: 'https://www.aviasales.ru/',
     avia_logo_content: '<div class="twidget-logo-image twidget-aviasales-logo-img" width="30" height="30"></div>aviasales',
-    hotel_logo_link: 'https://hotellook.ru/',
     avia_submit_domain: 'https://hydra.aviasales.ru/searches/new'
 };
 

@@ -75,8 +75,7 @@ module.exports = function makeWebpackConfig() {
             new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /(en|ru)/),
         ],
         externals: {
-            'angular': 'angular',
-            'jquery': 'jquery'
+            'angular': 'angular'
         }
     };
     return result;
