@@ -241,6 +241,7 @@ div, span, p, ol, ul, li, table, tbody, tfoot, thead, tr, th, td {
   li {
     &.twidget-flight-dates {
       width: 27%;
+      position: inherit;
     }
     &.twidget-passengers {
       width: 13%;
