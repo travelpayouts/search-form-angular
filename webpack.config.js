@@ -13,11 +13,14 @@ module.exports = function makeWebpackConfig() {
         context: __dirname,
         target: "web",
         entry: {
-            'tpSearchComponent': './src/module.js'
+            'tpSearchComponent': [
+                './src/module.js',
+                './src/scss/module.scss'
+            ]
         },
         output: {
             path: __dirname + "/dist/",
-            publicPath: "./dist/",
+            publicPath: "./",
             filename: "[name].js",
         },
         module: {
@@ -28,10 +31,7 @@ module.exports = function makeWebpackConfig() {
                         fallback: "style-loader",
                         use: [
                             {loader: 'css-loader', options: {importLoaders: 3, sourceMap: true}},
-                            'postcss-loader',
-                            {
-                                loader: 'sass-loader',
-                            }
+                            'sass-loader'
                         ]
                     })
                 },
@@ -46,7 +46,7 @@ module.exports = function makeWebpackConfig() {
                     test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                     use: "url-loader?limit=10000&mimetype=application/font-woff"
                 },
-                {test: /\.(ttf|eot|svg|png|jpg|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: "file-loader"},
+                {test: /\.(ttf|eot|png|jpg|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: "file-loader"},
                 {test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery"},
                 {
                     test: /\.html$/,
@@ -57,7 +57,12 @@ module.exports = function makeWebpackConfig() {
                         }
                     }]
                 },
-                {test: /\.tsx?$/, loader: 'ts-loader'},
+                {
+                    test: /\.svg/,
+                    use: {
+                        loader: 'svg-url-loader',
+                    }
+                }
             ]
         },
         plugins: [
@@ -74,26 +79,5 @@ module.exports = function makeWebpackConfig() {
             'jquery': 'jquery'
         }
     };
-
-    // result.plugins.push(
-    //     new webpack.LoaderOptionsPlugin({
-    //         sourceMap: false,
-    //         minimize: true,
-    //         discardComments: {
-    //             removeAll: true
-    //         }
-    //     })
-    // );
-    // result.plugins.push(
-    //     new webpack.optimize.UglifyJsPlugin({
-    //         compress: {
-    //             warnings: false,
-    //             drop_console: true
-    //         },
-    //         mangle: false,
-    //         comments: false
-    //     })
-    // );
-
     return result;
 };

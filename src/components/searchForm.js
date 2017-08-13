@@ -1,7 +1,7 @@
 var pick = require('lodash/pick');
 
 module.exports = angular.module('glook.travelPayoutsSearchComponent').component('searchForm', {
-    template: require('../templates/searchFormComponent.html'),
+    templateUrl: '/templates/searchFormComponent.html',
     bindings: {
         formData: '=',
         searchUrl: '<',
@@ -61,4 +61,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
             }
         };
     }
+}).run(function ($templateCache) {
+    $templateCache.put('/templates/searchFormComponent.html', require('../templates/searchFormComponent.html'));
 });
