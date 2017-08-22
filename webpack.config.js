@@ -78,5 +78,25 @@ module.exports = function makeWebpackConfig() {
             'angular': 'angular'
         }
     };
+    // Turn on compression
+    result.plugins.push(
+        new webpack.LoaderOptionsPlugin({
+            sourceMap: false,
+            minimize: true,
+            discardComments: {
+                removeAll: true
+            }
+        })
+    );
+    result.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true
+            },
+            mangle: false,
+            comments: false
+        })
+    );
     return result;
 };

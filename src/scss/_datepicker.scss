@@ -8,5 +8,145 @@
       }
     }
   }
+
+  &-cancel {
+    text-align: center;
+    margin: 5px 0;
+    &-return-date {
+      color: #ffaf1a !important;
+      margin-top: 0;
+      padding: 3px 12px;
+      display: inline-block;
+      line-height: 17px;
+      border: 1px solid #ffa600 !important;
+      border-radius: 40px !important;
+      text-align: center !important;
+      font-size: 11px;
+      cursor: pointer;
+    }
+  }
 }
 
+.datepicker {
+  border-radius: 0 !important;
+
+  table {
+
+    &.datepicker-day {
+      tr {
+        border-bottom: 3px solid white;
+      }
+      .day {
+        cursor: pointer;
+        &.range {
+          &.range-end, &.range-end:hover {
+            background: url("data:image/svg+xml,%3Csvg%20version%3D'1.2'%20baseProfile%3D'tiny'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2026%2022'%3E%3Cpath%20fill%3D'%2300B9FF'%20d%3D'M4.3%2022H26V0H4.3L0%2011z'%2F%3E%3C%2Fsvg%3E") no-repeat right;
+            background-color: #f5f5f5;
+            color: white;
+          }
+          &.range-start, &.range-start:hover {
+            background: url("data:image/svg+xml,%3Csvg%20version%3D'1.2'%20baseProfile%3D'tiny'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2026%2022'%3E%3Cpath%20fill%3D'%2300B9FF'%20d%3D'M21.7%2022H0V0h21.7L26%2011z'%2F%3E%3C%2Fsvg%3E") no-repeat;
+            background-color: #f5f5f5;
+            padding-right: 3px !important;
+            color: white;
+          }
+        }
+        &.active, &.active:hover {
+          background-color: #00b9ff;
+          color: #fff;
+        }
+
+      }
+    }
+  }
+  .datepicker-switch {
+    width: 160px;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  .prev:hover, .next:hover, tfoot tr th:hover {
+    background-color: transparent;
+  }
+  .prev, .next, .prev:hover {
+    color: transparent;
+    background: url("data:image/svg+xml,%3Csvg%20version%3D'1.2'%20baseProfile%3D'tiny'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2030.6%2024.6'%3E%3Cpath%20fill%3D'%2300B9FF'%20d%3D'M.6%2010.8l.2-.2%209.9-10c.8-.8%202.2-.8%203%200l.3.2c.8.8.8%202.2%200%203L7.9%2010h20.6c1.2%200%202.1%201%202.1%202.1v.3c0%201.2-1%202.1-2.1%202.1H7.9l6.2%206.2c.8.8.8%202.2%200%203l-.3.3c-.8.8-2.2.8-3%200L.8%2014l-.2-.2c-.8-.8-.8-2.2%200-3z'%2F%3E%3C%2Fsvg%3E") no-repeat 8px 6px;
+    background-size: 16px;
+    cursor: pointer;
+  }
+  .next {
+    &:hover {
+      color: transparent;
+      background: url("data:image/svg+xml,%3Csvg%20version%3D'1.2'%20baseProfile%3D'tiny'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2030.6%2024.6'%3E%3Cpath%20fill%3D'%2300B9FF'%20d%3D'M.6%2010.8l.2-.2%209.9-10c.8-.8%202.2-.8%203%200l.3.2c.8.8.8%202.2%200%203L7.9%2010h20.6c1.2%200%202.1%201%202.1%202.1v.3c0%201.2-1%202.1-2.1%202.1H7.9l6.2%206.2c.8.8.8%202.2%200%203l-.3.3c-.8.8-2.2.8-3%200L.8%2014l-.2-.2c-.8-.8-.8-2.2%200-3z'%2F%3E%3C%2Fsvg%3E") no-repeat 8px 6px;
+      background-size: 16px;
+    }
+    -webkit-transform: rotate(180deg) !important;
+    -ms-transform: rotate(180deg) !important;
+    -o-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+  }
+  thead tr:last-child {
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+  table tr {
+    td, th {
+      border-radius: 0;
+      width: 32px;
+      height: 25px;
+      line-height: 24px;
+      display: inline-block;
+      padding: 0 !important;
+      &.red {
+        color: red;
+      }
+    }
+    td {
+      color: #00B9FF;
+      &.new, &.range {
+        color: #00B9FF;
+      }
+      &.day:hover, &.focused {
+        color: black;
+      }
+    }
+  }
+}
+
+.datepicker table tr td {
+  &.active {
+    &:active, &.highlighted:active, &.active, &.highlighted.active {
+      background-color: #f5f5f5;
+    }
+  }
+  &.selected {
+    &:hover, &.highlighted:hover {
+      background-color: #00B9FF;
+    }
+  }
+  &.range {
+    background-color: #f5f5f5;
+  }
+  &.active {
+    &:active:hover, &.highlighted:active:hover, &.active:hover, &.highlighted.active:hover, &:active:focus, &.highlighted:active:focus, &.active:focus, &.highlighted.active:focus, &:active.focus, &.highlighted:active.focus, &.active.focus, &.highlighted.active.focus {
+      background-color: #00B9FF;
+    }
+  }
+}
+
+/*datepicker*/
+.datepicker > div {
+  display: block;
+}
+
+
+.datepicker-day {
+  font-family: 'Open Sans', arial, sans-serif;
+}
+
+.datepicker table tr td.disabled {
+  color: #a9a9a9;
+  &:hover, &.new {
+    color: #a9a9a9;
+  }
+}

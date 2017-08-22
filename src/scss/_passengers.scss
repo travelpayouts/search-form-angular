@@ -1,0 +1,174 @@
+.twidget-passengers {
+  &-detail {
+    height: 50px;
+    padding: 7px 14px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    position: relative;
+    background-color: #fff;
+    &.active {
+      border-color: #fdd835;
+      &:after {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+      }
+    }
+    .twidget-pas-no {
+      color: #424242;
+      line-height: 20px;
+    }
+    .twidget-class {
+      color: #999;
+      font-size: 13px;
+      line-height: 18px;
+    }
+    &:after {
+      background-image: url('../images/arrow-down.svg');
+      background-repeat: no-repeat;
+      width: 15px;
+      height: 12px;
+      background-position: 0 0;
+      content: "";
+      top: 19px;
+      right: 11px;
+      position: absolute;
+      background-size: 15px;
+    }
+  }
+
+  label {
+    color: white;
+    position: relative;
+    top: -4px;
+    font-size: 12px;
+    display: block;
+  }
+
+  &-ready-button-wrapper {
+    vertical-align: middle;
+    text-align: center;
+    display: block !important;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  &-ready-button {
+    display: inline-block;
+    padding: 0 30px;
+    font-size: 13px;
+    line-height: 43px;
+    border: 1px solid #ffa600 !important;
+    border-radius: 40px;
+    text-align: center;
+    margin: 0 auto;
+    color: #ffa600;
+    cursor: pointer;
+    clear: both;
+    &:hover {
+      border-color: #ffaf1a;
+      color: #ffaf1a;
+    }
+  }
+
+  .dropdown-menu {
+    width: 270px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    .twidget-age-group {
+      display: table;
+      width: 100%;
+      padding: 0;
+      li {
+        display: table-row;
+        .twidget-cell {
+          display: table-cell;
+          height: 44px;
+          vertical-align: middle;
+        }
+        .twidget-age-name {
+          padding-left: 20px;
+          width: 50%;
+        }
+        .twidget-age-select {
+          padding-right: 10px;
+          width: 40%;
+        }
+      }
+    }
+    .twidget-age-select {
+      .twidget-dec {
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+        text-indent: -9999px;
+        cursor: pointer;
+        border-radius: 25px;
+        line-height: 35px;
+        background: #fff 50% 50%/14px no-repeat;
+        background-image: url('../images/minus.svg');
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+      .twidget-num {
+        width: 30%;
+        text-align: center;
+        line-height: 1.4;
+        display: inline-block;
+
+      }
+      .twidget-inc {
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+        text-indent: -9999px;
+        cursor: pointer;
+        border-radius: 25px;
+        line-height: 35px;
+        background: #fff 50% 50%/14px no-repeat;
+        background-image: url('../images/plus.svg');
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+    }
+    .twidget-pas-class {
+      margin-top: 5px;
+      border-top: 1px solid #e0e0e0;
+
+      .twidget-pass-check {
+        margin-top: 11px;
+        padding-left: 20px;
+        input[type="checkbox"] {
+          display: none;
+        }
+        label {
+          line-height: 16px;
+          cursor: pointer;
+          position: relative;
+          padding-left: 24px;
+          display: inline-block;
+          color: #424242;
+          font-size: 14px;
+          &:before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 14px;
+            height: 14px;
+            border: 1px solid #00b1dd;
+          }
+        }
+        input[type="checkbox"]:checked + label:before, &-checked label:before {
+          background: url('data:image/svg+xml,%3Csvg%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208.5%206%22%3E%3Cstyle%3E.st0%7Bfill%3A%2300B9FF%3B%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M8.5%201.1L7.4%200%203.6%203.8%201.1%201.3%200%202.4%203.6%206z%22%2F%3E%3C%2Fsvg%3E') no-repeat 50% 50%;
+          background-size: 12px;
+        }
+      }
+    }
+  }
+
+}

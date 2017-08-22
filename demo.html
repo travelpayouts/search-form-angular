@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelPayouts search form</title>
+    <style>
+        body {
+            background: #00b1dd;
+        }
+        .wrapper {
+            max-width: 1170px;
+            margin: 0px auto;
+        }
+        .wrapper-title {
+            font-family: 'Open Sans', arial, sans-serif;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="./dist/tpSearchComponent.styles.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="./dist/tpSearchComponent.js"></script>
+    <script>
+        var TestApp = angular
+            .module("TestApp", ["glook.travelPayoutsSearchComponent"])
+            .controller("TestCtrl", function ($scope) {
+                // initial form params
+                $scope.formData = {
+                    origin: 'MOW',
+                    destination: 'NYC',
+                    adults: 1,
+                    children: 2,
+                    infants: 3
+                };
+                $scope.submit = function () {
+                    var data = JSON.stringify($scope.formData);
+                    alert('Form data:' + data);
+                };
+            });
+
+    </script>
+</head>
+<body ng-app='TestApp'>
+<div class="wrapper" ng-controller='TestCtrl'>
+    <h1 class="wrapper-title">TravelPayouts search form</h1>
+    <search-form lang="en" form-data="formData" search-url="searchUrl" on-submit="submit()"></search-form>
+</div>
+</body>
+</html>

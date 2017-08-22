@@ -3,8 +3,6 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').factory('t
         'en': require('../messages/en'),
         'ru': require('../messages/ru')
     };
-
-
     return {
         locale: 'en',
         setLocale: function (locale) {
@@ -28,12 +26,10 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').factory('t
     };
 
 }).filter('translate', function (translateFactory, $sce) {
-
     function translateFilter(input) {
         var message = translateFactory.getTranslate(input);
         return $sce.trustAsHtml(message);
     }
-
     return translateFilter;
 }).filter('plural', function () {
     return function (number, str1, str2, str3) {

@@ -46,7 +46,7 @@ module.exports = angular.module('glook.travelPayoutsSearchComponent').component(
 
         self.$onInit = function () {
             translateFactory.setLocale(self.lang);
-            self.data = self.formData;
+            self.data = angular.copy(self.formData);
             moment.locale(self.lang);
         };
 
