@@ -1,8 +1,8 @@
-#tp-ng-search
+# tp-ng-search
 ___
 Simple component which helps you integrate [TravelPayouts](https://www.travelpayouts.com/) search form into your angularjs app. **[Demo](https://rawgit.com/travelpayouts/search-form-angular/master/demo.html)**.
 
-##Installation
+## Installation
 1. You can install this component via bower, npm or clone this repository into your project folder.
 	*  via [Bower](http://bower.io/): by running `$ bower install tp-ng-search` from your terminal
 	*  via [npm](https://www.npmjs.org/): by running `$ npm install tp-ng-search` from your terminal
