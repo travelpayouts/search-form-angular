@@ -1,5 +1,5 @@
 # tp-ng-search
-Simple component which helps you integrate [TravelPayouts](https://www.travelpayouts.com/) search form into your angularjs app. **[Demo](https://rawgit.com/travelpayouts/search-form-angular/master/demo.html)**.
+A simple component which helps you integrate [TravelPayouts](https://www.travelpayouts.com/) search form into your angularjs app. **[Demo](https://rawgit.com/travelpayouts/search-form-angular/master/demo.html)**.
 
 ## Installation
 1. You can install this component via bower, npm or clone this repository into your project folder.
